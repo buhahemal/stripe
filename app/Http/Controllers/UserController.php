@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
+use DataTables;
 
 class UserController extends Controller
 {
@@ -15,8 +16,22 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = User::with('roles')->where('id',1)->get();
-        return Response::json($user);
+        return view('users');
+    }
+
+    public function getusers(){
+        $query = User::with('roles');
+        return DataTables::eloquent($query)
+        ->limit(function ($query) {
+            $query->where('id', '>', request('start'));
+        })
+        ->addIndexColumn()
+        ->addColumn('action', function($row){
+            $actionBtn = '<a href="javascript:void(0)" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" class="delete btn btn-danger btn-sm">Delete</a>';
+            return $actionBtn;
+        })
+        ->rawColumns(['action'])
+        ->make(true);
     }
 
     /**
