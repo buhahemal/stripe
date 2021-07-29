@@ -27,7 +27,8 @@ class User extends Authenticatable
         'permenentaddress'
     ];
 
-
+    protected $hidden = [
+        'pivot'];
     /**
      * The attributes that should be cast to native types.
      *
@@ -38,4 +39,8 @@ class User extends Authenticatable
         'created_at' => 'timestamp',
         'updated_at' => 'timestamp'
     ];
+
+    public function roles(){
+        return $this->belongsToMany(Role::class,'user_has_roles','userid','roleid')->select(['rolename']);
+    }
 }

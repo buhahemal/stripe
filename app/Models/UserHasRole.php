@@ -19,7 +19,7 @@ class UserHasRole extends Model
         'userid',
         'roleid'
     ];
-
+    
     /**
      * The attributes that should be cast to native types.
      *

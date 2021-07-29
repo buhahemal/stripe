@@ -9,7 +9,9 @@ class Role extends Model
 {
     use HasFactory;
     protected $dateFormat = 'U';
-
+    protected $hidden = [
+        'pivot'
+    ];
     /**
      * The attributes that are mass assignable.
      *
