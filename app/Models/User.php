@@ -28,7 +28,8 @@ class User extends Authenticatable
     ];
 
     protected $hidden = [
-        'pivot'];
+        'pivot'
+    ];
     /**
      * The attributes that should be cast to native types.
      *
