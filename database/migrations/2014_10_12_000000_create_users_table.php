@@ -22,7 +22,6 @@ class CreateUsersTable extends Migration
             $table->integer('birthdate');
             $table->string('currentaddress');
             $table->string('permenentaddress');
-            $table->rememberToken();
             $table->integer('created_at')->nullable();
             $table->integer('updated_at')->nullable();
         });

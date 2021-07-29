@@ -13,7 +13,7 @@ class CreateUserhasRolesTable extends Migration
      */
     public function up()
     {
-        Schema::create('userhas_roles', function (Blueprint $table) {
+        Schema::create('user_has_roles', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('userid');
             $table->foreign('userid')->references('id')->on('users');
@@ -21,6 +21,8 @@ class CreateUserhasRolesTable extends Migration
             $table->foreign('roleid')->references('id')->on('roles');
             $table->integer('created_at')->nullable();
             $table->integer('updated_at')->nullable();
+            $table->index('userid');
+            $table->index('roleid');
         });
     }
 
