@@ -44,10 +44,12 @@ class CreateUserRequest extends FormRequest
     public function messages(){
         return [
             'email.unique' => 'The Email Address has already been taken.',
-            'roles.*.exists' => 'The selected roles is invalid.',
+            'roles.*.exists' => 'The selected role is invalid.',
             'dateofbirth.before' => 'The Date of Birth must be a date before today.',
             'profileimg.mimes' => 'The Profile Image must be a file of type: jpg, png.',
             'profileimg.max' => 'The Profile Image must not be greater than 2048 kilobytes.',
+            'dateofbirth.required' => 'The Date of Birth field is required.',
+            'roles.required' => 'The Role field is required.'
         ];
     }
 }
