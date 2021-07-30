@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateUserRequest;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
@@ -16,7 +18,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('users');
+        $roles = Role::pluck('rolename','id');
+        return view('users')->with('roles',$roles);
     }
 
     public function getusers(){
@@ -50,9 +53,10 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(CreateUserRequest $request)
+    {   
+        $file = $request->profileimg->store('public');
+        return Response::json($request->all());
     }
 
     /**
