@@ -9,23 +9,49 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
     <style>
-        img {
+        .imglist {
             border: 1px solid #ddd;
             border-radius: 4px;
             padding: 5px;
             width: 100px;
         }
-
-        img:hover {
-            box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
-        }
     </style>
 </head>
 
 <body>
-    <button type="button" class="btn btn-primary" id="addEmployeeModalOpen">
-        Add Employee
-    </button>
+    <div class="container" style="padding-top: 2%;">
+        <div class="row">
+        <div class="col-md-3  offset-md-9">
+        <button type="button" class="btn btn-primary" id="addEmployeeModalOpen">
+            Add Employee
+        </button>
+    </div>
+        
+        </div>
+        <h2 class="mb-4">Employee List</h2>
+        <br>
+        <table class="table table-striped table-bordered wrap">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Profile</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>DOB</th>
+                    <th>CurrentAddress</th>
+                    <th>PermenentAddress</th>
+                    <th>Role</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+
+
     <!-- Add Employee Modal -->
     <div class="modal fade" id="addEmployee" tabindex="-1" aria-labelledby="addEmployeeModal" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -42,20 +68,20 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="inputFirstName" class="form-label">First Name</label>
-                                        <input type="text" required maxlength="255" name="firstName"  class="form-control" id="firstName" aria-describedby="firstNameHelp">
+                                        <input type="text" required maxlength="255" name="firstName" class="form-control" id="firstName" aria-describedby="firstNameHelp">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="inputLastName" class="form-label">Last Name</label>
-                                        <input type="text" required maxlength="255" name="lastName"  class="form-control" id="lastName" aria-describedby="lastNameHelp">
+                                        <input type="text" required maxlength="255" name="lastName" class="form-control" id="lastName" aria-describedby="lastNameHelp">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="inputEmail" class="form-label">Email</label>
-                                    <input type="email" required name="email" maxlength="255" class="form-control"  id="email" aria-describedby="emailHelp">
+                                    <input type="email" required name="email" maxlength="255" class="form-control" id="email" aria-describedby="emailHelp">
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
@@ -68,13 +94,13 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="inputCurrentAddress" class="form-label">Current Address</label>
-                                        <input type="text" required name="currentaddress" class="form-control" id="currentAddress"  aria-describedby="currentaddressHelp">
+                                        <input type="text" required name="currentaddress" class="form-control" id="currentAddress" aria-describedby="currentaddressHelp">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="inputPermenentAddress" class="form-label">Permenent Address</label>
-                                        <input type="text" required name="permenentaddress" class="form-control" id="permenetAddress"  aria-describedby="permenentaddressHelp">
+                                        <input type="text" required name="permenentaddress" class="form-control" id="permenetAddress" aria-describedby="permenentaddressHelp">
                                     </div>
                                 </div>
                             </div>
@@ -95,7 +121,8 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="profileImage" class="form-label">Image</label>
-                                        <input accept="image/jpg, image/png" type="file" required name='profileimg' class="form-control" id="profileimage" aria-describedby="permenentaddressHelp">
+                                        <input accept="image/jpg, image/png" type="file" required name='profileimg'  onchange="document.getElementById('profileImgPreview').src = window.URL.createObjectURL(this.files[0])" class="form-control" id="profileimage" aria-describedby="profileImageHelp">
+                                        <img id="profileImgPreview" alt="Preview Image" width="100%"/>
                                     </div>
                                 </div>
                             </div>
@@ -130,20 +157,20 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="EinputFirstName" class="form-label">First Name</label>
-                                        <input type="text" required maxlength="255" name="firstName"  class="form-control" id="EfirstName" aria-describedby="firstNameHelp">
+                                        <input type="text" required maxlength="255" name="firstName" class="form-control" id="EfirstName" aria-describedby="firstNameHelp">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="EinputLastName" class="form-label">Last Name</label>
-                                        <input type="text" required maxlength="255" name="lastName"  class="form-control" id="ElastName" aria-describedby="lastNameHelp">
+                                        <input type="text" required maxlength="255" name="lastName" class="form-control" id="ElastName" aria-describedby="lastNameHelp">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="EinputEmail" class="form-label">Email</label>
-                                    <input type="email" required maxlength="255" name="email" class="form-control"  id="Eemail" aria-describedby="emailHelp">
+                                    <input type="email" required maxlength="255" name="email" class="form-control" id="Eemail" aria-describedby="emailHelp">
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
@@ -156,13 +183,13 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="EinputCurrentAddress" class="form-label">Current Address</label>
-                                        <input type="text" required name="currentaddress" class="form-control" id="EcurrentAddress"  aria-describedby="currentaddressHelp">
+                                        <input type="text" required name="currentaddress" class="form-control" id="EcurrentAddress" aria-describedby="currentaddressHelp">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="inputPermenentAddress" class="form-label">Permenent Address</label>
-                                        <input type="text" required name="permenentaddress" class="form-control" id="EpermenetAddress"  aria-describedby="permenentaddressHelp">
+                                        <input type="text" required name="permenentaddress" class="form-control" id="EpermenetAddress" aria-describedby="permenentaddressHelp">
                                     </div>
                                 </div>
                             </div>
@@ -183,8 +210,8 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="profileImage" class="form-label">Image</label>
-                                        <input type="file" accept="image/jpg, image/png" name='profileimg' class="form-control" id="Eprofileimg" aria-describedby="ProfileImgHelp">
-                                        <img id="Eprofileview" />
+                                        <input type="file" accept="image/jpg, image/png" onchange="document.getElementById('Eprofileview').src = window.URL.createObjectURL(this.files[0])" name='profileimg' class="form-control" id="Eprofileimg" aria-describedby="ProfileImgHelp">
+                                        <img id="Eprofileview" style="width:100%" />
                                     </div>
                                 </div>
                             </div>
@@ -200,27 +227,6 @@
                 </form>
             </div>
         </div>
-    </div>
-    <div class="container">
-        <h2 class="mb-4">Employee List</h2>
-        <table class="table table-striped table-bordered wrap">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Profile</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
-                    <th>DOB</th>
-                    <th>CurrentAddress</th>
-                    <th>PermenentAddress</th>
-                    <th>Role</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
     </div>
 </body>
 
@@ -238,13 +244,15 @@
     });
     var EmployeeId = null;
     var table = null;
-    let yesterdayDate = new Date(new Date().setDate(new Date().getDate()-1)),
-    maxDate = yesterdayDate.toISOString().substring(0,10);
+    let yesterdayDate = new Date(new Date().setDate(new Date().getDate() - 1)),
+        maxDate = yesterdayDate.toISOString().substring(0, 10);
     $('#DOB').prop('max', maxDate);
     $('#EDOB').prop('max', maxDate);
+
     function sweet(msg) {
         swal("Good job!", msg, "success");
     }
+
     function oopsWentWrong(msg) {
         swal("Oops", msg, "error")
     }
@@ -298,7 +306,7 @@
             success: function(response) {
                 EmployeeId = null;
                 sweet(response.message);
-                table.ajax.reload(null,false);
+                table.ajax.reload(null, false);
                 $("#EditEmployeeModal").modal("hide");
             },
             error: function(error) {
@@ -368,7 +376,7 @@
                         success: function(response) {
                             EmployeeId = null;
                             sweet(response.message);
-                            table.ajax.reload(null,false);
+                            table.ajax.reload(null, false);
                         },
                         error: function(error) {
                             EmployeeId = null;
@@ -391,7 +399,7 @@
         return time;
     }
     $(function() {
-     table = $('.table').DataTable({
+        table = $('.table').DataTable({
             processing: true,
             serverSide: true,
             responsive: true,
@@ -409,18 +417,12 @@
                     data: 'profileimg',
                     name: 'profileimg',
                     render: function(data, type, row) {
-                        return '<img src="' + data + '" />';
+                        return '<img class="imglist" loading="lazy" src="' + data + '" />';
                     }
                 },
                 {
                     data: 'firstname',
                     name: 'firstname'
-                },
-                {
-                    data: 'action',
-                    name: 'action',
-                    orderable: false,
-                    searchable: false
                 },
                 {
                     data: 'lastname',
@@ -455,6 +457,12 @@
                         });
                         return tempString;
                     },
+                    orderable: false,
+                    searchable: false
+                },
+                {
+                    data: 'action',
+                    name: 'action',
                     orderable: false,
                     searchable: false
                 },

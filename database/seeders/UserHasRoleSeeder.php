@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use App\Models\UserHasRole;
 use Illuminate\Database\Seeder;
 
@@ -14,6 +15,8 @@ class UserHasRoleSeeder extends Seeder
      */
     public function run()
     {
-        UserHasRole::factory()->times(10)->create();
+        User::all()->each(function ($user) {
+            $user->roles()->sync([rand(1,7)]);
+        });
     }
 }
