@@ -4,20 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateuserRequest;
-use App\Models\Role;
-use App\Models\User;
-use App\Models\UserHasRole;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Response;
-use DataTables;
-use Exception;
-use GrahamCampbell\ResultType\Result;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Response as CodeResponse;
+use App\Repository\RoleRepositoryInterface;
+use App\Repository\UserRepositoryInterface;
+use App\Service\FileService;
 
 class UserController extends Controller
 {
+    private $user;
+    private $role;
+    public function __construct(UserRepositoryInterface $user,RoleRepositoryInterface $role)
+    {
+        $this->user = $user;
+        $this->role = $role;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -25,24 +24,13 @@ class UserController extends Controller
      */
     public function index()
     {
-        $roles = Role::pluck('rolename', 'id');
+        $roles = $this->role->getRoleNameAndId();
         return view('users')->with('roles', $roles);
     }
 
-    public function getusers()
+    public function getUsers()
     {
-        $query = User::with('roles');
-        return DataTables::eloquent($query)
-            ->limit(function ($query) {
-                $query->where('id', '>', request('start'));
-            })
-            ->addIndexColumn()
-            ->addColumn('action', function ($row) {
-                $actionBtn = '<a href="javascript:void(0)" id="' . $row->id . '" class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" id="' . $row->id . '" class="delete btn btn-danger btn-sm">Delete</a>';
-                return $actionBtn;
-            })
-            ->rawColumns(['action'])
-            ->make(true);
+      return $this->user->all();
     }
 
     /**
@@ -63,26 +51,9 @@ class UserController extends Controller
      */
     public function store(CreateUserRequest $createUserRequest)
     {
-        try {
-            $files = $createUserRequest->profileimg;
-            $profileImage = time() . "." . $files->getClientOriginalExtension();
-            $files->move(public_path('/profileimages/'), $profileImage);
-            DB::beginTransaction();
-            $user = User::create([
-                'firstname' => $createUserRequest->firstName,
-                'lastname' => $createUserRequest->lastName,
-                'email' => $createUserRequest->email,
-                'birthdate' => $createUserRequest->dateofbirth,
-                'profileimg' => $profileImage,
-                'currentaddress' => $createUserRequest->currentaddress,
-                'permenentaddress' => $createUserRequest->permenentaddress,
-            ]);
-            $user->roles()->sync($createUserRequest->roles);
-            DB::commit();
-            return Response::json(['code' => CodeResponse::HTTP_CREATED, 'message' => 'Employee created successfully!']);
-        } catch (Exception $th) {
-            return Response::json(['code' => CodeResponse::HTTP_INTERNAL_SERVER_ERROR, 'message' => 'Oops Its Not you its us!']);
-        }
+        $profileImg = (new FileService())->addMedia($createUserRequest->profileimg,public_path('/profileimages/'));
+        $createUserRequest->profileimg = $profileImg;
+        return $this->user->create($createUserRequest); 
     }
 
     /**
@@ -93,13 +64,7 @@ class UserController extends Controller
      */
     public function show($userId)
     {
-        try {
-            $user = User::findorfail($userId);
-            $user = $user->load('roles');
-            return Response::json(['code' => CodeResponse::HTTP_OK, 'user' => $user]);
-        } catch (ModelNotFoundException $th) {
-            return Response::json(['code' => CodeResponse::HTTP_NOT_FOUND, 'message' => 'Employee Record Not Found'], CodeResponse::HTTP_NOT_FOUND);
-        }
+        return $this->user->show($userId);    
     }
 
     /**
@@ -110,13 +75,7 @@ class UserController extends Controller
      */
     public function edit($userId)
     {
-        try {
-            $user = User::findorfail($userId);
-            $user = $user->load('roles');
-            return Response::json(['code' => CodeResponse::HTTP_OK, 'user' => $user]);
-        } catch (ModelNotFoundException $th) {
-            return Response::json(['code' => CodeResponse::HTTP_NOT_FOUND, 'message' => 'Employee Record Not Found'], CodeResponse::HTTP_NOT_FOUND);
-        }
+        return $this->user->show($userId);  
     }
 
     /**
@@ -126,30 +85,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateuserRequest $UpdateUserRequest, $userid)
+    public function update(UpdateuserRequest $UpdateUserRequest, $userId)
     {
-        try {
-            $user =  User::findorfail($userid);
-            if($UpdateUserRequest->hasFile('profileimg')) {
-                $profileImg = $UpdateUserRequest->file('profileimg');
-                $profileImage = time() . "." . $profileImg->getClientOriginalExtension();
-                $profileImg->move(public_path('profileimages'), $profileImage);
-                $user->profileimg = $profileImage;
-            }
-            DB::beginTransaction();
-            $user->firstname = $UpdateUserRequest->firstName;
-            $user->lastname = $UpdateUserRequest->lastName;
-            $user->email  = $UpdateUserRequest->email;
-            $user->birthdate = $UpdateUserRequest->dateofbirth;
-            $user->currentaddress = $UpdateUserRequest->currentaddress;
-            $user->permenentaddress = $UpdateUserRequest->permenentaddress;
-            $user->update();
-            $user->roles()->sync($UpdateUserRequest->Eroles);
-            DB::commit();
-            return Response::json($UpdateUserRequest->all());
-        } catch (ModelNotFoundException $th) {
-            return Response::json(['code' => CodeResponse::HTTP_NOT_FOUND, 'message' => 'Employee Record Not Found'], CodeResponse::HTTP_NOT_FOUND);
+        if($UpdateUserRequest->hasFile('profileimg')) {
+            $UpdateUserRequest->profileimg = (new FileService())->addMedia($UpdateUserRequest->profileimg,public_path('/profileimages/'));;
         }
+        return $this->user->Update($userId,$UpdateUserRequest);
     }
 
     /**
@@ -158,15 +99,8 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($userid)
+    public function destroy($userId)
     {
-        try {
-            $user = User::findorfail($userid);
-            $user->roles()->detach();
-            $user->delete();
-            return Response::json(['code' => CodeResponse::HTTP_OK, 'message' => 'Employee Record Deleted Successfully!.']);
-        } catch (ModelNotFoundException $th) {
-            return Response::json(['code' => CodeResponse::HTTP_NOT_FOUND, 'message' => 'Employee Record Not Found'], CodeResponse::HTTP_NOT_FOUND);
-        }
+        return $this->user->Delete($userId);
     }
 }
