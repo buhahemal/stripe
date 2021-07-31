@@ -19,8 +19,7 @@ class CreateUserhasRolesTable extends Migration
             $table->foreign('userid')->references('id')->on('users');
             $table->unsignedBigInteger('roleid');
             $table->foreign('roleid')->references('id')->on('roles');
-            $table->integer('created_at')->nullable();
-            $table->integer('updated_at')->nullable();
+            $table->timestamps();
             $table->index('userid');
             $table->index('roleid');
         });

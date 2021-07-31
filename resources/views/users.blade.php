@@ -42,25 +42,25 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="inputFirstName" class="form-label">First Name</label>
-                                        <input type="text" name="firstName" value="hemal" class="form-control" id="firstName" aria-describedby="firstNameHelp">
+                                        <input type="text" required maxlength="255" name="firstName"  class="form-control" id="firstName" aria-describedby="firstNameHelp">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="inputLastName" class="form-label">Last Name</label>
-                                        <input type="text" name="lastName" value="Buha" class="form-control" id="lastName" aria-describedby="lastNameHelp">
+                                        <input type="text" required maxlength="255" name="lastName"  class="form-control" id="lastName" aria-describedby="lastNameHelp">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="inputEmail" class="form-label">Email</label>
-                                    <input type="email" name="email" class="form-control" value="buhahemal10@gmail.com" id="email" aria-describedby="emailHelp">
+                                    <input type="email" required name="email" maxlength="255" class="form-control"  id="email" aria-describedby="emailHelp">
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="inputDOB" class="form-label">Date of Birth</label>
-                                        <input type="date" name="dateofbirth" class="form-control" id="DOB" aria-describedby="DOBHelp">
+                                        <input type="date" required name="dateofbirth" class="form-control" id="DOB" aria-describedby="DOBHelp">
                                     </div>
                                 </div>
                             </div>
@@ -68,13 +68,13 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="inputCurrentAddress" class="form-label">Current Address</label>
-                                        <input type="text" name="currentaddress" class="form-control" id="currentAddress" value="Bjjhj" aria-describedby="currentaddressHelp">
+                                        <input type="text" required name="currentaddress" class="form-control" id="currentAddress"  aria-describedby="currentaddressHelp">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="inputPermenentAddress" class="form-label">Permenent Address</label>
-                                        <input type="text" name="permenentaddress" class="form-control" id="permenetAddress" value="Bjjhj" aria-describedby="permenentaddressHelp">
+                                        <input type="text" required name="permenentaddress" class="form-control" id="permenetAddress"  aria-describedby="permenentaddressHelp">
                                     </div>
                                 </div>
                             </div>
@@ -94,8 +94,8 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="inputPermenentAddress" class="form-label">Image</label>
-                                        <input type="file" name='profileimg' class="form-control" id="permenetAddress" aria-describedby="permenentaddressHelp">
+                                        <label for="profileImage" class="form-label">Image</label>
+                                        <input accept="image/jpg, image/png" type="file" required name='profileimg' class="form-control" id="profileimage" aria-describedby="permenentaddressHelp">
                                     </div>
                                 </div>
                             </div>
@@ -130,25 +130,25 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="EinputFirstName" class="form-label">First Name</label>
-                                        <input type="text" name="firstName" value="hemal" class="form-control" id="EfirstName" aria-describedby="firstNameHelp">
+                                        <input type="text" required maxlength="255" name="firstName"  class="form-control" id="EfirstName" aria-describedby="firstNameHelp">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="EinputLastName" class="form-label">Last Name</label>
-                                        <input type="text" name="lastName" value="Buha" class="form-control" id="ElastName" aria-describedby="lastNameHelp">
+                                        <input type="text" required maxlength="255" name="lastName"  class="form-control" id="ElastName" aria-describedby="lastNameHelp">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="EinputEmail" class="form-label">Email</label>
-                                    <input type="email" name="email" class="form-control" value="buhahemal10@gmail.com" id="Eemail" aria-describedby="emailHelp">
+                                    <input type="email" required maxlength="255" name="email" class="form-control"  id="Eemail" aria-describedby="emailHelp">
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="EinputDOB" class="form-label">Date of Birth</label>
-                                        <input type="date" name="dateofbirth" class="form-control" id="EDOB" aria-describedby="DOBHelp">
+                                        <input type="date" required name="dateofbirth" class="form-control" id="EDOB" aria-describedby="DOBHelp">
                                     </div>
                                 </div>
                             </div>
@@ -156,13 +156,13 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="EinputCurrentAddress" class="form-label">Current Address</label>
-                                        <input type="text" name="currentaddress" class="form-control" id="EcurrentAddress" value="Bjjhj" aria-describedby="currentaddressHelp">
+                                        <input type="text" required name="currentaddress" class="form-control" id="EcurrentAddress"  aria-describedby="currentaddressHelp">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="inputPermenentAddress" class="form-label">Permenent Address</label>
-                                        <input type="text" name="permenentaddress" class="form-control" id="EpermenetAddress" value="Bjjhj" aria-describedby="permenentaddressHelp">
+                                        <input type="text" required name="permenentaddress" class="form-control" id="EpermenetAddress"  aria-describedby="permenentaddressHelp">
                                     </div>
                                 </div>
                             </div>
@@ -182,14 +182,14 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="EinputPermenentAddress" class="form-label">Image</label>
-                                        <input type="file" name='profileimg' class="form-control" id="Eprofileimg" aria-describedby="ProfileImgHelp">
+                                        <label for="profileImage" class="form-label">Image</label>
+                                        <input type="file" accept="image/jpg, image/png" name='profileimg' class="form-control" id="Eprofileimg" aria-describedby="ProfileImgHelp">
                                         <img id="Eprofileview" />
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div id="form-errors"></div>
+                                <div id="Eform-errors"></div>
                             </div>
                         </div>
                     </div>
@@ -236,6 +236,12 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+    var EmployeeId = null;
+    var table = null;
+    let yesterdayDate = new Date(new Date().setDate(new Date().getDate()-1)),
+    maxDate = yesterdayDate.toISOString().substring(0,10);
+    $('#DOB').prop('max', maxDate);
+    $('#EDOB').prop('max', maxDate);
     function sweet(msg) {
         swal("Good job!", msg, "success");
     }
@@ -259,6 +265,8 @@
             processData: false,
             success: function(response) {
                 sweet(response.message);
+                table.ajax.reload();
+                $("#addEmployee").modal("hide");
             },
             error: function(error) {
                 if (error.status === 422) {
@@ -276,8 +284,40 @@
         });
     });
 
+    $('#EditEmployee').on('submit', function(e) {
+        e.preventDefault();
+        $('#Eform-errors').html('');
+        let formData = new FormData(this);
+        $.ajax({
+            type: "POST",
+            url: 'user/' + EmployeeId,
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                EmployeeId = null;
+                sweet(response.message);
+                table.ajax.reload(null,false);
+                $("#EditEmployeeModal").modal("hide");
+            },
+            error: function(error) {
+                if (error.status === 422) {
+                    let errors = error.responseJSON;
+                    errorsHtml = '<div class="alert alert-danger"><ul>';
+                    $.each(errors['errors'], function(key, value) {
+                        errorsHtml += '<li>' + value[0] + '</li>';
+                    });
+                    errorsHtml += '</ul></di>';
+                    $('#Eform-errors').html(errorsHtml);
+                } else {
+                    oopsWentWrong(error.message);
+                }
+            }
+        });
+    });
     $(document).on('click', '.edit', function(event) {
-        let EmployeeId = event.target.id;
+        EmployeeId = event.target.id;
         if (!!EmployeeId) {
             $.ajax({
                 type: "GET",
@@ -307,6 +347,41 @@
         }
     });
 
+    $(document).on('click', '.delete', function(event) {
+        EmployeeId = event.target.id;
+        swal({
+                title: "Are You Sure?",
+                text: "You will Be Not Able To Retrieve This Employee Details.",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, Delete it!",
+                cancelButtonText: "No, Cancel Please!",
+                closeOnConfirm: false,
+                closeOnCancel: false
+            },
+            function(isConfirm) {
+                if (isConfirm) {
+                    $.ajax({
+                        type: "delete",
+                        url: 'user/' + EmployeeId,
+                        success: function(response) {
+                            EmployeeId = null;
+                            sweet(response.message);
+                            table.ajax.reload(null,false);
+                        },
+                        error: function(error) {
+                            EmployeeId = null;
+                            oopsWentWrong(error.responseJSON.message);
+                        }
+                    });
+                } else {
+                    swal("Cancelled", "Employee Details is Safe:)", "error");
+                }
+            });
+    });
+
+
     function timeConverter(UNIX_timestamp) {
         let a = new Date(UNIX_timestamp * 1000);
         let year = a.getFullYear();
@@ -316,11 +391,11 @@
         return time;
     }
     $(function() {
-
-        var table = $('.table').DataTable({
+     table = $('.table').DataTable({
             processing: true,
             serverSide: true,
             responsive: true,
+            stateSave: true,
             scrollX: true,
             pagingType: "full_numbers",
             ajax: "{{ route('users.list') }}",

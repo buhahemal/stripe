@@ -23,3 +23,5 @@ Route::get('user', [UserController::class,'getusers'])->name('users.list');
 Route::post('user',[UserController::class,'store'])->name('users.add');
 Route::get('user/{userid}',[UserController::class,'show'])->name('users.show');
 Route::get('user/{userid}/edit',[UserController::class,'edit'])->name('users.edit');
+Route::post('user/{userid}',[UserController::class,'update'])->name('users.update');
+Route::delete('user/{userid}',[UserController::class,'destroy'])->name('users.destory');
